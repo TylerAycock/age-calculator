@@ -9,19 +9,21 @@
 .input-group{
     display: flex;
     align-items: center;
-    margin: 0px 70px;
+    margin: 20px 7px 0px 70px;
     height: 30%;
     width: 80%;
     border-bottom:1px solid var(--smoke-grey) ;
 }
 
 .ind-input{
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
     gap: 10px;
     color: var(--smoke-grey);
     letter-spacing: .2rem;
     width: 30%;
+    height: 75%;
 }
 
 .ind-input input {
@@ -61,7 +63,7 @@
     cursor: pointer;
     position: absolute;
     right: 5%;
-    top: 22%;
+    top: 25%;
 }
 
 .btn:hover{
@@ -101,6 +103,7 @@
     font-size: .5rem;
     font-weight: bold;
     color: var(--light-red);
+    display: none;
 }
 
 .error{
@@ -109,5 +112,8 @@
 
 .error input{
     border: 1px solid var(--light-red);
-   
+}
+
+.error .req-field{
+    display: block;
 }

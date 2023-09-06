@@ -1,8 +1,9 @@
 import arrow from "../assets/images/icon-arrow.svg";
 import "./AgeCalculator.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const AgeCalculator = () => {
+  const [empty, setEmpty] = useState(false);
 
   const [age, setAge] = useState({
     year: "- -",
@@ -19,41 +20,39 @@ const AgeCalculator = () => {
 
     let birthDate = new Date(`${bMonth}/${bDay}/${bYear}`);
     let today = new Date();
+    if (birthDate.toString() === "Invalid Date") {
+      setEmpty(true);
+    } else {
+      let yearsDiff = today.getFullYear() - birthDate.getFullYear();
+      let monthsDiff = today.getMonth() - birthDate.getMonth();
+      let daysDiff = today.getDate() - birthDate.getDate();
 
-    if (today.getFullYear() < birthDate.getFullYear()) {
-      alert("date must be in the past");
+      if (daysDiff < 0) {
+        let lastDayOfMonth = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          0
+        ).getDate();
+        monthsDiff--;
+        daysDiff += lastDayOfMonth;
+      }
+
+      if (monthsDiff < 0) {
+        yearsDiff--;
+        monthsDiff += 12;
+      }
+
+      setAge({
+        year: yearsDiff,
+        month: monthsDiff,
+        day: daysDiff,
+      });
     }
-
-    let yearsDiff = today.getFullYear() - birthDate.getFullYear();
-    let monthsDiff = today.getMonth() - birthDate.getMonth();
-    let daysDiff = today.getDate() - birthDate.getDate();
-
-    if (daysDiff < 0) {
-      let lastDayOfMonth = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        0
-      ).getDate();
-      monthsDiff--;
-      daysDiff += lastDayOfMonth;
-    }
-
-    if (monthsDiff < 0) {
-      yearsDiff--;
-      monthsDiff += 12;
-    }
-
-    setAge({
-      year: yearsDiff,
-      month: monthsDiff,
-      day: daysDiff,
-    });
-    
   };
   return (
     <div className="main-container">
       <form className="input-group" onSubmit={submitHandler}>
-        <div className="ind-input">
+        <div className={!empty ? "ind-input" : "ind-input error"}>
           <label htmlFor="day">DAY</label>
           <input
             type="text"
@@ -61,12 +60,16 @@ const AgeCalculator = () => {
             id="day"
             placeholder="DD"
             maxLength={2}
-            required
-            onChange={(e) => setBDay(e.target.value)}
+            onChange={(e) => {
+              setBDay(e.target.value);
+              if (empty) {
+                setEmpty(false);
+              }
+            }}
           />
           <span className="req-field">This field is required</span>
         </div>
-        <div className="ind-input error">
+        <div className={!empty ? "ind-input" : "ind-input error"}>
           <label htmlFor="month">MONTH</label>
           <input
             type="text"
@@ -74,11 +77,16 @@ const AgeCalculator = () => {
             id="month"
             placeholder="MM"
             maxLength={2}
-            required
-            onChange={(e) => setBMonth(e.target.value)}
+            onChange={(e) => {
+              setBMonth(e.target.value);
+              if (empty) {
+                setEmpty(false);
+              }
+            }}
           />
+          <span className="req-field">This field is required</span>
         </div>
-        <div className="ind-input">
+        <div className={!empty ? "ind-input" : "ind-input error"}>
           <label htmlFor="year">YEAR</label>
           <input
             type="text"
@@ -86,9 +94,14 @@ const AgeCalculator = () => {
             id="year"
             placeholder="YYYY"
             maxLength={4}
-            required
-            onChange={(e) => setBYear(e.target.value)}
+            onChange={(e) => {
+              setBYear(e.target.value);
+              if (empty) {
+                setEmpty(false);
+              }
+            }}
           />
+          <span className="req-field">This field is required</span>
         </div>
         <button type="submit" className="btn">
           <img src={arrow} alt="arrow" />
