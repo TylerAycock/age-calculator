@@ -1,0 +1,113 @@
+.main-container{
+    background-color: var(--white);
+    width: 55%;
+    height: 70%;
+    border-radius: 5% 5% 25% 5%;
+    position: relative;
+}
+
+.input-group{
+    display: flex;
+    align-items: center;
+    margin: 0px 70px;
+    height: 30%;
+    width: 80%;
+    border-bottom:1px solid var(--smoke-grey) ;
+}
+
+.ind-input{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--smoke-grey);
+    letter-spacing: .2rem;
+    width: 30%;
+}
+
+.ind-input input {
+    width: 65%;
+    padding: 20px  10px;
+    /* margin-right: 20px; */
+    border-radius: 10px;
+    border: 1px solid var(--smoke-grey);
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.ind-input input::placeholder{
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.ind-input input:focus{
+    outline: none;
+    border: 1px solid var(--purple);
+}
+
+.ind-input input:hover{
+    cursor: pointer;
+    outline: none;
+    border: 1px solid var(--purple);
+}
+
+.btn{
+    border-radius: 50%;
+    padding: 20px;
+    background-color: var(--purple);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 5%;
+    top: 22%;
+}
+
+.btn:hover{
+    background-color: var(--off-black);
+}
+
+.output-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70%;
+    padding-left: 50px;
+}
+
+.ind-output{
+    display: flex;
+    align-items: center;
+}
+
+.title{
+    font-size: 5.5rem;
+    color: var(--off-black);
+}
+
+.output{
+    /* border: 1px solid black; */
+    width: 150px;
+    color: var(--purple);
+    font-size: 5.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.req-field{
+    font-style: italic;
+    font-size: .5rem;
+    font-weight: bold;
+    color: var(--light-red);
+}
+
+.error{
+    color: var(--light-red);
+}
+
+.error input{
+    border: 1px solid var(--light-red);
+   
+}
