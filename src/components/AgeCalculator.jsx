@@ -4,30 +4,21 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const AgeCalculator = () => {
-  const [empty, setEmpty] = useState(false);
-
-  let current = new Date
-  let year = current.getFullYear()
+  let current = new Date();
+  let year = current.getFullYear();
 
   const {
+    reset,
     register,
     handleSubmit,
-    formState: {errors}
+    formState: { errors },
   } = useForm({
     defaultValues: {
       day: "",
       year: "",
-      month: ""
-    }
+      month: "",
+    },
   });
-
-  const initialValues = {
-    day: "",
-    year: "",
-    month: ""
-  };
-
-  const [birthday, setBirthDay] = useState(initialValues);
 
   const [age, setAge] = useState({
     day: "- -",
@@ -35,50 +26,37 @@ const AgeCalculator = () => {
     year: "- -",
   });
 
-  const changeHandler = (e) => {
-    const { name, value } = e.target;
-    setBirthDay({
-      ...birthday,
-      [name]: value,
-    });
-  };
-
   const submitHandler = (data) => {
-    console.log(data)
-    
-    // setBirthDay(initialValues);
-    // let birthDate = new Date(
-    //   `${+birthday.month}/${+birthday.day}/${+birthday.year}`
-    // );
-    // let today = new Date();
-    // if (birthDate.toString() === "Invalid Date") {
-    //   alert("invalid entry!");
-    // } else {
-    //   let yearsDiff = today.getFullYear() - birthDate.getFullYear();
-    //   let monthsDiff = today.getMonth() - birthDate.getMonth();
-    //   let daysDiff = today.getDate() - birthDate.getDate();
+    let {day, month, year} = data
+    let birthDate = new Date(
+      `${month}/${day}/${year}`
+    );
+    let today = new Date();
+      let yearsDiff = today.getFullYear() - birthDate.getFullYear();
+      let monthsDiff = today.getMonth() - birthDate.getMonth();
+      let daysDiff = today.getDate() - birthDate.getDate();
 
-    //   if (daysDiff < 0) {
-    //     let lastDayOfMonth = new Date(
-    //       today.getFullYear(),
-    //       today.getMonth(),
-    //       0
-    //     ).getDate();
-    //     monthsDiff--;
-    //     daysDiff += lastDayOfMonth;
-    //   }
+      if (daysDiff < 0) {
+        let lastDayOfMonth = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          0
+        ).getDate();
+        monthsDiff--;
+        daysDiff += lastDayOfMonth;
+      }
 
-    //   if (monthsDiff < 0) {
-    //     yearsDiff--;
-    //     monthsDiff += 12;
-    //   }
+      if (monthsDiff < 0) {
+        yearsDiff--;
+        monthsDiff += 12;
+      }
 
-    //   setAge({
-    //     year: yearsDiff,
-    //     month: monthsDiff,
-    //     day: daysDiff,
-    //   });
-    // }
+      setAge({
+        year: yearsDiff,
+        month: monthsDiff,
+        day: daysDiff,
+      });
+      reset()
   };
 
   return (
@@ -93,13 +71,14 @@ const AgeCalculator = () => {
             placeholder="DD"
             maxLength={2}
             name="day"
-            defaultValue={birthday.day}
-            onChange={changeHandler}
-            {...register('day', {required: "This field is required", max: { value: 31, message: 'Must be a valid day'}})}
+            {...register("day", {
+              required: "This field is required",
+              max: { value: 31, message: "Must be a valid day" },
+            })}
           />
-          <span className="error-field" >{errors.day?.message}</span>
+          <span className="error-field">{errors.day?.message}</span>
         </div>
-        <div className={!empty ? "ind-input" : "ind-input error"}>
+        <div className={errors.month ? "ind-input error" : "ind-input"}>
           <label htmlFor="month">MONTH</label>
           <input
             type="text"
@@ -108,13 +87,14 @@ const AgeCalculator = () => {
             placeholder="MM"
             maxLength={2}
             name="month"
-            defaultValue={birthday.month}
-            onChange={changeHandler}
-            {...register('month', {required: "This field is required" , max:{value: 12, message: "Must be a valid month"}})}
+            {...register("month", {
+              required: "This field is required",
+              max: { value: 12, message: "Must be a valid month" },
+            })}
           />
           <span className="error-field">{errors.month?.message}</span>
         </div>
-        <div className={!empty ? "ind-input" : "ind-input error"}>
+        <div className={errors.year ? "ind-input error" : "ind-input"}>
           <label htmlFor="year">YEAR</label>
           <input
             type="text"
@@ -123,9 +103,10 @@ const AgeCalculator = () => {
             placeholder="YYYY"
             maxLength={4}
             name="year"
-            defaultValue={birthday.year}
-            onChange={changeHandler}
-            {...register('year', {required: 'This field is required', max: {value: year, message: "Must be in the past"}})}
+            {...register("year", {
+              required: "This field is required",
+              max: { value: year, message: "Must be in the past" },
+            })}
           />
           <span className="error-field">{errors.year?.message}</span>
         </div>
