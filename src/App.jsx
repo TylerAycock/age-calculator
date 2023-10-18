@@ -5,7 +5,7 @@ function App() {
 
 
   return (
-    <div className='body'>
+    <div className='wrapper'>
      <AgeCalculator/>
     </div>
   )

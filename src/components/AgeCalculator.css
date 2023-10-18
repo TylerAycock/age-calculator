@@ -1,35 +1,35 @@
 .main-container{
     background-color: var(--white);
-    width: 55%;
-    height: 70%;
     border-radius: 5% 5% 25% 5%;
     position: relative;
+    max-width: 800px;
+    min-height: 500px;
+}
+
+.content__container{
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 .input-group{
     display: flex;
     align-items: center;
-    margin: 20px 7px 0px 70px;
-    height: 30%;
-    width: 80%;
+    align-items: center;
+    padding: 40px 90px 40px 0px;
     border-bottom:1px solid var(--smoke-grey) ;
 }
 
 .ind-input{
-    /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
     gap: 10px;
     color: var(--smoke-grey);
-    letter-spacing: .2rem;
-    width: 30%;
-    height: 75%;
+    letter-spacing: .2em;
 }
 
 .ind-input input {
     width: 65%;
     padding: 20px  10px;
-    /* margin-right: 20px; */
     border-radius: 10px;
     border: 1px solid var(--smoke-grey);
     cursor: pointer;
@@ -63,7 +63,7 @@
     cursor: pointer;
     position: absolute;
     right: 5%;
-    top: 25%;
+    top: 26%;
 }
 
 .btn:hover{
@@ -71,17 +71,14 @@
 }
 
 .output-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 70%;
-    padding-left: 50px;
+    margin: 50px 0px;
 }
 
 .ind-output{
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: min-content 1fr;
 }
+
 
 .title{
     font-size: 5.5rem;
@@ -89,13 +86,9 @@
 }
 
 .output{
-    /* border: 1px solid black; */
     width: 150px;
     color: var(--purple);
     font-size: 5.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .error-field{
@@ -103,7 +96,6 @@
     font-size: .5rem;
     font-weight: bold;
     color: var(--light-red);
-    /* display: none; */
 }
 
 .error{
@@ -113,7 +105,3 @@
 .error input{
     border: 1px solid var(--light-red);
 }
-
-/* .error .req-field{
-    display: block;
-} */
