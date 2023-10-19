@@ -4,6 +4,7 @@
     position: relative;
     max-width: 800px;
     min-height: 500px;
+    margin: 0px 50px;
 }
 
 .content__container{
@@ -77,6 +78,14 @@
 .ind-output{
     display: grid;
     grid-template-columns: min-content 1fr;
+    align-items: center;
+}
+
+.ind-output span{
+    max-width: 125px;
+    /* max-width: min-content; */
+    padding-right: 10px;
+    border: 1px solid;
 }
 
 
@@ -104,4 +113,27 @@
 
 .error input{
     border: 1px solid var(--light-red);
+}
+
+
+@media screen and (max-width: 700px){
+
+    .input-group{
+        padding: 60px 10px;
+    }
+
+    .btn{
+        right: 41%;
+        top: 31%
+    }
+
+    .ind-output h2{
+        font-size: 5em;
+    }
+}
+
+@media screen and (max-width:600px){
+    .ind-output h2{
+        font-size: 3.5em;
+    }
 }
